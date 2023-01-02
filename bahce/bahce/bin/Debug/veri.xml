@@ -1,0 +1,15 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="isokur.xsl"?>
+<Tarih_Date Tarih="26.12.2022" Date="12/26/2022"  Bulten_No="2022/246" >
+	<Currency CrossOrder="0" Kod="USD" CurrencyCode="USD">
+			<Unit>1</Unit>
+			<Isim>ABD DOLARI</Isim>
+			<CurrencyName>US DOLLAR</CurrencyName>
+			<ForexBuying>18.6649</ForexBuying>
+			<ForexSelling>18.6986</ForexSelling>
+			<BanknoteBuying>18.6519</BanknoteBuying>
+			<BanknoteSelling>18.7266</BanknoteSelling>
+			<CrossRateUSD/>
+			<CrossRateOther/>
+</Tarih_Date>
