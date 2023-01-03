@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Xml.Linq;
 using System.Xml;
 
 namespace bahce
 {
     public partial class panel : Form 
     {
+        string hava_lnk = "https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml";
 
         adminyonet admyonet = new adminyonet();
         public panel()
@@ -25,21 +27,25 @@ namespace bahce
 
         private void panel_Load(object sender, EventArgs e)
         {
-            
-           /* string bugun = "http://www.tcmb.gov.tr/kurlar/today.xml";
-            var xmldoc = new XmlDocument();
 
-            string eskigun = "http://www.tcmb.gov.tr/kurlar/201501/31122022";
 
-            xmldoc.Load(bugun);
-            DateTime tarih = Convert.ToDateTime(xmldoc.SelectSingleNode("//Tarih_Date").Attributes["Tarih"].Value);
-                
-            string USD = xmldoc.SelectSingleNode("Tarih_Date/Currency [@kod='USD']/BanknoteSelling").InnerXml;
-            label1.Text = string.Format("Tarih {0} USD; {1}", tarih.ToShortDateString(), USD);
+            XmlDocument doc1 = new XmlDocument();
+            doc1.Load(hava_lnk);
+            XmlElement root = doc1.DocumentElement;
+            XmlNodeList nodes = root.SelectNodes("sehirler");
+            foreach (XmlNode node in nodes)
+            {
+                string ili = node["ili"].InnerText;
+                string durum = node["Durum"].InnerText;
+                string max_scaklk = node["Mak"].InnerText;
 
-            string EURO = xmldoc.SelectSingleNode("Tarih_Date/Currency [@kod='EUR']/BanknoteSelling").InnerXml;
-            label1.Text = string.Format("Tarih {0} EURO; {1}", tarih.ToShortDateString(), EURO);*/
+                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                row.Cells[0].Value = ili;
+                row.Cells[1].Value = durum;
+                row.Cells[2].Value = max_scaklk;
+                dataGridView1.Rows.Add(row);
 
+            }
 
             timer1.Start();
 
@@ -88,6 +94,13 @@ namespace bahce
         private void timer1_Tick(object sender, EventArgs e)
         {
             label2.Text = DateTime.Now.ToString();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            mavibahce mavibahce = new mavibahce();
+            mavibahce.Show();
+            this.Close();
         }
     }
 }

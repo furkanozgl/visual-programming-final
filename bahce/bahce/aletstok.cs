@@ -93,11 +93,23 @@ namespace bahce
         {
             con.Open();
             MySqlCommand cmd = new MySqlCommand("update alet set adet='" + textBox5.Text + "',fiyat='" + textBox4.Text + "' where tohumid='" + textBox1.Text + "'", con);
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Kayıt Başarıyla Güncellenmiştir.", "DURUM", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            verigoster("SELECT * FROM tohum");
-            con.Close();
-            textBox1.Clear();
+            if (textBox1 == null)
+            {
+                MessageBox.Show("lütfen bir id giriniz");
+            }
+            else
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Kayıt Başarıyla Güncellenmiştir.", "DURUM", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                verigoster("SELECT * FROM tohum");
+                con.Close();
+                textBox1.Clear();
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
